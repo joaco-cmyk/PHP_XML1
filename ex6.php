@@ -10,7 +10,7 @@
        <to>Tove22222222</to>
        <from>Jani</from>
        <heading>Reminder</heading>
-       <body>Do not forget me this weekend!</body>
+       <body type="ordinary" class="B">Do not forget me this weekend!</body>
    </note>
    XML;
 
@@ -29,10 +29,16 @@
 
 
    $r = new SimpleXMLElement($masage);
-
-
+   $r->addAttribute("id","direct_message");
+foreach($xml->body[0]->attributes() as $a => $b)
+  {
+  $r->addAttribute($a,$b);
+  }
+foreach($xml->children() as $child)
+    {
+        $r->addChild($child->getName(), (string)$child);
+    }
    header("Content-Type: application/xml; charset=UTF-8");
    echo $r->asXML();
-
 
 ?>
