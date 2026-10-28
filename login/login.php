@@ -22,6 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($passwordMatches) {
                 session_regenerate_id(true);
                 $_SESSION['username'] = (string) $user->name;
+                $xml->asXML(__DIR__ . '/login_prueba.xml');
+                $xml->addChild('connection');
+                $xml->connection->addChild('user', (string) $user->name);
+                $xml->connection->addChild('date', date('Y-m-d H:i:s'));
+                $xml->connection->addChild('action', 'login');
+                $xml->asXML(__DIR__ . '/login_prueba.xml');
                 header('Location: panel.php');
                 exit();
             }

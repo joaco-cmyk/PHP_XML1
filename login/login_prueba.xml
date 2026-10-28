@@ -4,4 +4,23 @@
         <name>Raphina</name>
         <password>1234</password>
     </username>
+    <username>
+        <name>joaquin</name>
+        <password>$2y$12$KEZBXuSDNbTTNXBbWbTzVOegs64cBl.AX0IVL.hMAozdLc3qT4W6K</password>
+    </username>
+    <connection>
+        <user>Raphina</user>
+        <date>2026-10-28 17:46:40</date>
+        <action>logout</action>
+    </connection>
+    <connection>
+        <user>Raphina</user>
+        <date>2026-10-28 17:46:55</date>
+        <action>login</action>
+    </connection>
+    <connection>
+        <user>Raphina</user>
+        <date>2026-10-28 17:47:01</date>
+        <action>logout</action>
+    </connection>
 </login>
