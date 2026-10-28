@@ -7,6 +7,7 @@
    $note=<<<XML
    <note>
        <name>{$name}</name>
+       <phone>{$phone}</phone>
        <to>Tove22222222</to>
        <from>Jani</from>
        <heading>Reminder</heading>
