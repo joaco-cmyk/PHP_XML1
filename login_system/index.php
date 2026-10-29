@@ -1,10 +1,10 @@
 <?php
-
+require 'functions.php';
 $username = $_GET['username'] ?? '';
 $password = $_GET['password'] ?? '';
 
 if (isset($_GET['username']) && isset($_GET['password'])) {
-    $xml = @simplexml_load_file(__DIR__ . '/users.xml');
+    $xml = loadXmlFile(__DIR__ . '/users.xml');
 
     if ($xml !== false) {
         foreach ($xml->username as $user) {
@@ -33,4 +33,3 @@ if (isset($_GET['username']) && isset($_GET['password'])) {
 }
 
 
-?>
