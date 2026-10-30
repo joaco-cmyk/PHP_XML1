@@ -36,4 +36,16 @@
     <login>2026-10-30 16:09:56</login>
     <logout/>
   </connection>
+  <connection>
+    <username>action</username>
+    <session_id/>
+    <login>2026-10-30 16:29:27</login>
+    <logout/>
+  </connection>
+  <connection>
+    <username>hola</username>
+    <session_id>be55b06c99a93a0500391aae0c0784db</session_id>
+    <login>2026-10-30 16:35:40</login>
+    <logout/>
+  </connection>
 </connections>

@@ -38,9 +38,8 @@ function register($username, $password) {
 function login($username, $password) {
     $users = loadXmlFile('users.xml', 'users');
     foreach ($users->user as $u) {
-        if ((string) $u->username === $username && (string) $u->password === $password) {
+        if ((string) $u->username === $username && (string) $u->password === $password) {   
             $_SESSION['username'] = $username;
-
             $connection = loadXmlFile('connections.xml', 'connections');
             $newConnection = $connection->addChild('connection');
             $newConnection->addChild('username', $username);
