@@ -3,15 +3,25 @@ require_once 'functions.php';
 
 $username = $_GET['username'] ?? '';
 $password = $_GET['password'] ?? '';
+$login = $_GET['login'] ?? '';
 $register = $_GET['register'] ?? '';
 $logout = $_GET['logout'] ?? '';
+$deleteUser = $_GET['deleteUser'] ?? '';
+
+if (isset($deleteUser) && $deleteUser === 'true' && isset($username)) {
+    if (DeleteUser($username)) {
+        echo "User deleted successfully.";
+    } else {
+        echo "User not found.";
+    }
+}
 
 if (isset($logout) && $logout === 'true') {
     logout();
     echo "Logged out successfully.";
 }
 
-if (isset($username) && isset($password) && $register !== 'true' && $logout !== 'true') {
+if (isset($login) && $login === 'true' && isset($username) && isset($password)) {
     if (login($username, $password)) {
         echo "Login successful!";
     } else {

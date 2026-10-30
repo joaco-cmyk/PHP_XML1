@@ -20,12 +20,4 @@
     <username>perdon</username>
     <password>12345</password>
   </user>
-  <user>
-    <username>sorry</username>
-    <password>12345</password>
-  </user>
-  <user>
-    <username>todo</username>
-    <password>123456</password>
-  </user>
 </users>

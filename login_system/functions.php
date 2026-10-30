@@ -6,6 +6,14 @@ function loadXmlFile($file, $root = null) {
     return simplexml_load_file($file);
 }
 
+function saveXmlFile($xml, $file) {
+    $dom = new DOMDocument('1.0', 'UTF-8');
+    $dom->preserveWhiteSpace = false;
+    $dom->formatOutput = true;
+    $dom->loadXML($xml->asXML());
+    $dom->save($file);
+}
+
 function userExists($username){
     $users = loadXmlFile('users.xml', 'users');
     foreach ($users->user as $u) {
@@ -16,13 +24,6 @@ function userExists($username){
     return false;
 }
 
-function saveXmlFile($xml, $file) {
-    $dom = new DOMDocument('1.0', 'UTF-8');
-    $dom->preserveWhiteSpace = false;
-    $dom->formatOutput = true;
-    $dom->loadXML($xml->asXML());
-    $dom->save($file);
-}
 
 function register($username, $password) {
     if (userExists($username)) return false;
@@ -67,4 +68,16 @@ function logout() {
     }
     session_unset();
     session_destroy();
+}
+
+function DeleteUser($username) {
+    $users = loadXmlFile('users.xml', 'users');
+    foreach ($users->user as $u) {
+        if ((string) $u->username === $username) {
+            unset($u[0]);
+            saveXmlFile($users, 'users.xml');
+            return true;
+        }
+    }
+    return false;
 }
