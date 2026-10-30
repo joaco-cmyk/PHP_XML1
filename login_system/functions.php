@@ -16,13 +16,21 @@ function userExists($username){
     return false;
 }
 
+function saveXmlFile($xml, $file) {
+    $dom = new DOMDocument('1.0', 'UTF-8');
+    $dom->preserveWhiteSpace = false;
+    $dom->formatOutput = true;
+    $dom->loadXML($xml->asXML());
+    $dom->save($file);
+}
+
 function register($username, $password) {
     if (userExists($username)) return false;
     $users = loadXmlFile('users.xml', 'users');
     $newUser = $users->addChild('user');
     $newUser->addChild('username', $username);
     $newUser->addChild('password', $password);
-    $users->asXML('users.xml');
+    saveXmlFile($users, 'users.xml');
     return true;
 }
 
@@ -38,7 +46,7 @@ function login($username, $password) {
             $newConnection->addChild('session_id', session_id());
             $newConnection->addChild('login', date('Y-m-d H:i:s'));
             $newConnection->addChild('logout', '');
-            $connection->asXML('connections.xml');
+            saveXmlFile($connection, 'connections.xml');
             return true;
         }
     }
@@ -55,7 +63,7 @@ function logout() {
                 break;
             }
         }
-        $connection->asXML('connections.xml');
+        saveXmlFile($connection, 'connections.xml');
     }
     session_unset();
     session_destroy();

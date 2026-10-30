@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users>
+  <user>
+    <username>hola</username>
+    <password>1234</password>
+  </user>
+  <user>
+    <username>jane_smith</username>
+    <password>hashed_password_2</password>
+  </user>
+  <user>
+    <username>prueba</username>
+    <password>12345</password>
+  </user>
+  <user>
+    <username>prueba2</username>
+    <password>12345</password>
+  </user>
+  <user>
+    <username>perdon</username>
+    <password>12345</password>
+  </user>
+  <user>
+    <username>sorry</username>
+    <password>12345</password>
+  </user>
+  <user>
+    <username>todo</username>
+    <password>123456</password>
+  </user>
+</users>

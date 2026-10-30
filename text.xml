@@ -4,4 +4,4 @@
 <from>Jani</from>
 <heading>Reminder</heading>
 <body>Do not forget me this weekend!<date>2014-01-01</date></body>
-<footer>Some footer text</footer></note>
+<footer>Some footer text</footer><note/></note>

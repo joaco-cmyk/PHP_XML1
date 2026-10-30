@@ -1,35 +1,28 @@
 <?php
-require 'functions.php';
+require_once 'functions.php';
+
 $username = $_GET['username'] ?? '';
 $password = $_GET['password'] ?? '';
+$register = $_GET['register'] ?? '';
+$logout = $_GET['logout'] ?? '';
 
-if (isset($_GET['username']) && isset($_GET['password'])) {
-    $xml = loadXmlFile(__DIR__ . '/users.xml');
-
-    if ($xml !== false) {
-        foreach ($xml->username as $user) {
-            if (strcasecmp((string) $user->name, $username) !== 0) {
-                continue;
-            }
-
-            $storedPassword = (string) $user->password;
-            $passwordInfo = password_get_info($storedPassword);
-            $passwordMatches = $passwordInfo['algo'] !== null
-                ? password_verify($password, $storedPassword)
-                : hash_equals($storedPassword, $password);
-
-            if ($passwordMatches) {
-                session_start();
-                session_regenerate_id(true);
-                $_SESSION['username'] = (string) $user->name;
-                header('Location: panel.php');
-                exit();
-            }
-        }
-    }
-
-    header('Location: index.php?error=1');
-    exit();
+if (isset($logout) && $logout === 'true') {
+    logout();
+    echo "Logged out successfully.";
 }
 
+if (isset($username) && isset($password) && $register !== 'true' && $logout !== 'true') {
+    if (login($username, $password)) {
+        echo "Login successful!";
+    } else {
+        echo "Invalid username or password.";
+    }
+}
 
+if (isset($register) && $register === 'true' && isset($username) && isset($password) && $logout !== 'true') {
+    if (register($username, $password)) {
+        echo "Registration successful!";
+    } else {
+        echo "Username already exists.";
+    }
+}
