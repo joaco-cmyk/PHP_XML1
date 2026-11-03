@@ -33,3 +33,15 @@ if (isset($action) && $action === 'register' && isset($username) && isset($passw
         echo "Username already exists.";
     }
 }
+
+if (isset($action) && $action === 'time') {
+    if (!isset($_GET['username'])) {
+    echo "Faltan datos. username=nombre";
+} else {
+    $sesiones = tiempoSesion($_GET['username']);
+    foreach ($sesiones as $i => $s) {
+        echo "Sesion " . ($i + 1) . ": " . formatearTiempo($s) . "\n";
+    }
+    echo "Total: " . formatearTiempo(tiempoTotal($_GET['username']));
+}
+}

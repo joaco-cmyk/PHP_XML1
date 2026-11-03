@@ -80,3 +80,31 @@ function DeleteUser($username) {
     }
     return false;
 }
+
+function tiempoSesion($username) {
+    $conns = loadXmlFile('connections.xml', 'connections');
+    $resultado = [];
+
+    foreach ($conns->connection as $c) {
+        if ((string)$c->username == $username && (string)$c->logout != '') {
+            $segundos = strtotime((string)$c->logout) - strtotime((string)$c->login);
+            $resultado[] = $segundos;
+        }
+    }
+    return $resultado;
+}
+
+function tiempoTotal($username) {
+    $total = 0;
+    foreach (tiempoSesion($username) as $s) {
+        $total += $s;
+    }
+    return $total;
+}
+
+function formatearTiempo($segundos) {
+    $h = floor($segundos / 3600);
+    $m = floor(($segundos % 3600) / 60);
+    $s = $segundos % 60;
+    return sprintf('%02d:%02d:%02d', $h, $m, $s);
+}
