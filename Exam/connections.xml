@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connections>
+  <connection>
+    <name>aure</name>
+    <session_id>3c2f61a57f9f5526849dd8a246e332aa</session_id>
+    <login>2026-11-03 17:56:13</login>
+    <logout>2026-11-03 18:44:32</logout>
+  </connection>
+  <connection>
+    <name>joaquin</name>
+    <session_id>3c2f61a57f9f5526849dd8a246e332aa</session_id>
+    <login>2026-11-03 18:15:01</login>
+    <logout>2026-11-03 18:37:26</logout>
+  </connection>
+  <connection>
+    <name>aure</name>
+    <session_id>21e18ae2fbdd19d23f22cf91527c1956</session_id>
+    <login>2026-11-03 18:48:50</login>
+    <logout>2026-11-03 18:49:13</logout>
+  </connection>
+</connections>

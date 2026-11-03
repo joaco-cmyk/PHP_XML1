@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users>
+  <user>
+    <name>aure</name>
+    <last_name>perez</last_name>
+    <dni>aureT12</dni>
+    <age>30</age>
+    <password>aureliano1234</password>
+  </user>
+  <user>
+    <name>joaquin</name>
+    <last_name>zamora</last_name>
+    <dni>joaquinT12</dni>
+    <age>18</age>
+    <password>joaquin1234</password>
+  </user>
+  <user>
+    <name>pruebaErrorRegistro</name>
+    <password/>
+    <last_name>zamora</last_name>
+    <dni>joaquinT12</dni>
+    <age>18</age>
+  </user>
+  <user>
+    <name>pruebaErrorRegistro</name>
+    <password/>
+    <last_name>zamora</last_name>
+    <dni>joaquinT12</dni>
+    <age>18</age>
+  </user>
+</users>
