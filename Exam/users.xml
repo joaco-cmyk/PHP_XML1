@@ -28,4 +28,11 @@
     <dni>joaquinT12</dni>
     <age>18</age>
   </user>
+  <user>
+    <name>pruebaxml</name>
+    <password>1234</password>
+    <last_name>xml2</last_name>
+    <dni>12853793B</dni>
+    <age>25</age>
+  </user>
 </users>

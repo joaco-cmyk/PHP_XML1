@@ -18,4 +18,10 @@
     <login>2026-11-03 18:48:50</login>
     <logout>2026-11-03 18:49:13</logout>
   </connection>
+  <connection>
+    <name>pruebaxml</name>
+    <session_id>afcae673c180e21f9c339926081f9744</session_id>
+    <login>2026-11-11 13:01:29</login>
+    <logout>2026-11-11 13:02:04</logout>
+  </connection>
 </connections>

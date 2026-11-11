@@ -8,6 +8,28 @@ function saveXmlFile($xml, $file) {
     $dom->save($file);
 }
 
+function appendXmlValue(SimpleXMLElement $parent, string $name, $value) {
+    $element = $parent->addChild($name);
+    if (is_array($value)) {
+        foreach ($value as $key => $childValue) {
+            appendXmlValue($element, is_int($key) ? 'item' : $key, $childValue);
+        }
+    } elseif ($value !== null) {
+        $element[0] = is_bool($value) ? ($value ? 'true' : 'false') : (string)$value;
+    }
+}
+
+function outputXml($data) {
+    header('Content-Type: application/xml; charset=UTF-8');
+    $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><response/>');
+
+    foreach ($data as $name => $value) {
+        appendXmlValue($xml, $name, $value);
+    }
+
+    echo $xml->asXML();
+}
+
 function userExists($name){
     $users = simplexml_load_file('users.xml');
     foreach ($users->user as $u) {
@@ -28,31 +50,26 @@ function register($user_info) {
     $users =simplexml_load_file('users.xml');
     $newUser = $users->addChild('user');
     if ($name === null) {
-        echo "Error: No se ha indicado nombre\n";
         return false;
     } else {
         $newUser->addChild('name', $name);
     }
     if ($password === null) {
-        echo "Error: No se ha indicado contraseña\n";
         return false;
     } else {
         $newUser->addChild('password', $password);
     }
     if ($last_name === null) {
-        echo "Error: No se ha indicado apellido\n";
         return false;
     } else {
         $newUser->addChild('last_name', $last_name);
     }
     if ($dni === null) {
-        echo "Error: No se ha indicado DNI\n";
         return false;
     } else {
         $newUser->addChild('dni', $dni);
     }
     if ($age === null) {
-        echo "Error: No se ha indicado edad\n";
         return false;
     } else {
         $newUser->addChild('age', $age);

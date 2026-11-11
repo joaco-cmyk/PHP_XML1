@@ -1,13 +1,14 @@
 <?php
 require_once 'functions.php';
 session_start();
-$action = $_GET['action'];
-$name = $_GET['name'];
-$dni = $_GET['dni'];
-$last_name = $_GET['last_name'];
-$age = $_GET['age'];
-$password = $_GET['password'];
+$action = $_GET['action'] ?? '';
+$name = $_GET['name'] ?? '';
+$dni = $_GET['dni'] ?? null;
+$last_name = $_GET['last_name'] ?? null;
+$age = $_GET['age'] ?? null;
+$password = $_GET['password'] ?? null;
 
+$response = [];
 
 switch ($action) {
     case 'register':
@@ -18,82 +19,69 @@ switch ($action) {
             'age' => $age,
             'password' => $password
         );
-        if (register($user_info)) {
-            echo "Usuario registrado correctamente.";
-        } else {
-            echo "Fallo al registrar el usuario.";
-        }
+        $response['message'] = register($user_info)
+            ? 'Usuario registrado correctamente.'
+            : 'Fallo al registrar el usuario.';
         break;
-    
+
     case 'login':
-        if (login($name, $password)) {
-            echo "Usuario logeado correctamente.";
-        } else {
-            echo "Nombre de usuario o contraseña incorrectos.";
-        }
+        $response['message'] = login($name, $password ?? '')
+            ? 'Usuario logeado correctamente.'
+            : 'Nombre de usuario o contraseña incorrectos.';
         break;
 
     case 'logout':
         logout();
-        echo "Deslogeado correctamente.";
+        $response['message'] = 'Deslogeado correctamente.';
         break;
 
     case 'usertime':
         $timeConnections = totalUserTimeConnection($name);
         if (count($timeConnections) === 0) {
-            echo "No se encontraron conexiones para $name.";
+            $response['message'] = "No se encontraron conexiones para $name.";
             break;
         }
-        echo "Tiempo de cada conexion de $name:<br>";
-        foreach ($timeConnections as $index => $time) {
-            echo "Conexion " . ($index + 1) . ": $time segundos.<br>";
-        }
-        echo "Tiempo de conexion total $name: " . array_sum($timeConnections) . " segundos.";
+        $response['message'] = "Tiempo de cada conexion de $name.";
+        $response['connections'] = $timeConnections;
+        $response['total_time'] = array_sum($timeConnections);
         break;
 
     case 'userdata':
         $userData = showUserData($name);
         if ($userData) {
-            echo "Datos del usuario para $name:<br>";
-            foreach ($userData as $key => $value) {
-                echo "$key: $value<br>";
-            }
+            $response['message'] = "Datos del usuario para $name.";
+            $response['user'] = $userData;
         } else {
-            echo "Usuario no encontrado.";
+            $response['message'] = 'Usuario no encontrado.';
         }
         break;
 
     case 'allusers':
-        $allUsers = showAllUsers();
-        echo "Todos los usuarios:<br>";
-        foreach ($allUsers as $user) {
-            echo "Nombre: " . $user['name'] . ", Apellido: " . $user['last_name'] . ", DNI: " . $user['dni'] . ", Edad: " . $user['age'] . ", Contraseña: " . $user['password'] . "<br>";
-        }
+        $response['message'] = 'Todos los usuarios.';
+        $response['users'] = showAllUsers();
         break;
 
     case 'allconnections':
-        $allConnections = showAllConnections();
-        echo "Todas las conexiones:<br>";
-        foreach ($allConnections as $connection) {
-            echo "Nombre: " . $connection['name'] . ", ID de Sesión: " . $connection['session_id'] . ", Inicio de Sesión: " . $connection['login'] . ", Fin de Sesión: " . $connection['logout'] . "<br>";
-        }
+        $response['message'] = 'Todas las conexiones.';
+        $response['connections'] = showAllConnections();
         break;
 
     case 'connectionexpired':
-        if (connectionsExpired($name)) {
-            if ($name === '') {
-                echo "Nombre de usuario no proporcionado.";
-                break;
-            }
-            echo "La conexión para $name ha expirado.";
-        } else {
-            echo "La conexión para $name aún está activa.";
+        if ($name === '') {
+            $response['message'] = 'Nombre de usuario no proporcionado.';
+            break;
         }
+        $expired = connectionsExpired($name);
+        $response['message'] = $expired
+            ? "La conexión para $name ha expirado."
+            : "La conexión para $name aún está activa.";
+        $response['expired'] = $expired;
         break;
 
     default:
-        echo "Acción inválida.";
+        $response['message'] = 'Acción inválida.';
         break;
 }
 
+outputXml($response);
 ?>

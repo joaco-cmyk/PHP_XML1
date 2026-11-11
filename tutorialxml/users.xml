@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users>
+  <user>
+    <name>joaquin</name>
+    <password>joaquin1234</password>
+    <last_name>zamora</last_name>
+    <dni>1234567A</dni>
+    <age>18</age>
+  </user>
+  <user>
+    <name>joaquin</name>
+    <password>joaquin1234</password>
+    <last_name>zamora</last_name>
+    <dni>1234567A</dni>
+    <age>18</age>
+  </user>
+  <user>
+    <name>joaquin</name>
+    <password>joaquin1234</password>
+    <last_name>zamora</last_name>
+    <dni>1234567A</dni>
+    <age>18</age>
+  </user>
+  <user>
+    <name>joaquin</name>
+    <password>joaquin1234</password>
+    <last_name>zamora</last_name>
+    <dni>1234567A</dni>
+    <age>18</age>
+  </user>
+  <user>
+    <name>joaquin</name>
+    <password>joaquin1234</password>
+    <last_name>zamora</last_name>
+    <dni>1234567A</dni>
+    <age>18</age>
+  </user>
+</users>

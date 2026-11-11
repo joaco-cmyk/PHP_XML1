@@ -5,6 +5,9 @@
       "label": "PHP: iniciar previsualización",
       "type": "shell",
       "command": "php -S 0.0.0.0:8000 -t \"${workspaceFolder}\"",
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
       "isBackground": true,
       "problemMatcher": {
         "pattern": {
