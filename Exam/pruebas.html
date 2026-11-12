@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pruebas de acciones</title>
+    <link rel="stylesheet" href="pruebas.css">
+</head>
+<body>
+    <h1>Pruebas de acciones</h1>
+
+    <h2>Acciones</h2>
+    <ul>
+        <li><a href="main.php?action=register&name=pruebahtml&last_name=pruebahtml&dni=pruebahtml&age=25&password=pruebahtml">Registrar usuario</a></li>
+        <li><a href="main.php?action=login&name=pruebahtml&password=pruebahtml">Iniciar sesión</a></li>
+        <li><a href="main.php?action=logout&name=pruebahtml">Cerrar sesión</a></li>
+        <li><a href="main.php?action=usertime&name=pruebahtml">Consultar tiempo de conexión</a></li>
+        <li><a href="main.php?action=userdata&name=pruebahtml">Consultar datos del usuario</a></li>
+        <li><a href="main.php?action=allusers&name=pruebahtml">Mostrar todos los usuarios</a></li>
+        <li><a href="main.php?action=allconnections&name=pruebahtml">Mostrar todas las conexiones</a></li>
+        <li><a href="main.php?action=connectionexpired&name=pruebahtml">Comprobar conexión</a></li>
+    </ul>
+
+    <h2>Registrar usuario con datos</h2>
+    <form action="main.php" method="get">
+        <input type="hidden" name="action" value="register">
+        <label>Nombre: <input type="text" name="name" required></label><br>
+        <label>Apellido: <input type="text" name="last_name" required></label><br>
+        <label>DNI: <input type="text" name="dni" required></label><br>
+        <label>Edad: <input type="number" name="age" required></label><br>
+        <label>Contraseña: <input type="password" name="password" required></label><br>
+        <button type="submit">Registrar</button>
+    </form>
+
+    <h2>Iniciar sesión con datos</h2>
+    <form action="main.php" method="get">
+        <input type="hidden" name="action" value="login">
+        <label>Nombre: <input type="text" name="name" required></label><br>
+        <label>Contraseña: <input type="password" name="password" required></label><br>
+        <button type="submit">Iniciar sesión</button>
+    </form>
+
+    <h2>Consultar acciones por usuario</h2>
+    <form action="main.php" method="get">
+        <input type="hidden" name="action" value="usertime">
+        <label>Nombre: <input type="text" name="name" required></label>
+        <button type="submit">Consultar tiempo de conexión</button>
+    </form>
+    <form action="main.php" method="get">
+        <input type="hidden" name="action" value="userdata">
+        <label>Nombre: <input type="text" name="name" required></label>
+        <button type="submit">Consultar datos del usuario</button>
+    </form>
+    <form action="main.php" method="get">
+        <input type="hidden" name="action" value="connectionexpired">
+        <label>Nombre: <input type="text" name="name" required></label>
+        <button type="submit">Comprobar conexión</button>
+    </form>
+</body>
+</html>

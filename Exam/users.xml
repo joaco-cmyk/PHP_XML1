@@ -35,4 +35,11 @@
     <dni>12853793B</dni>
     <age>25</age>
   </user>
+  <user>
+    <name>pruebahtml</name>
+    <password>pruebahtml</password>
+    <last_name>pruebahtml</last_name>
+    <dni>pruebahtml</dni>
+    <age>25</age>
+  </user>
 </users>
