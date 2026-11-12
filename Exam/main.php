@@ -7,7 +7,6 @@ $dni = $_GET['dni'] ?? null;
 $last_name = $_GET['last_name'] ?? null;
 $age = $_GET['age'] ?? null;
 $password = $_GET['password'] ?? null;
-
 $response = [];
 
 switch ($action) {
@@ -19,20 +18,35 @@ switch ($action) {
             'age' => $age,
             'password' => $password
         );
-        $response['message'] = register($user_info)
-            ? 'Usuario registrado correctamente.'
-            : 'Fallo al registrar el usuario.';
+        if (register($user_info)) {
+            $response['message'] = "El usuario $name fue registrado correctamente.";
+            $response['user'] = showUserData($name);
+        } else {
+            $response['message'] = "No se pudo registrar al usuario $name.";
+        }
         break;
 
     case 'login':
-        $response['message'] = login($name, $password ?? '')
-            ? 'Usuario logeado correctamente.'
-            : 'Nombre de usuario o contraseña incorrectos.';
+        if (login($name, $password ?? '')) {
+            $response['message'] = "El usuario $name inició sesión correctamente.";
+            $response['user'] = showUserData($name);
+            $response['connection'] = showUserConnection($name, session_id());
+        } else {
+            $response['message'] = "No se pudo iniciar sesión para el usuario $name: nombre o contraseña incorrectos.";
+        }
         break;
 
     case 'logout':
+        $loggedOutUser = $_SESSION['name'] ?? null;
+        $loggedOutSessionId = session_id();
         logout();
-        $response['message'] = 'Deslogeado correctamente.';
+        $response['message'] = $loggedOutUser !== null
+            ? "El usuario $loggedOutUser cerró sesión correctamente."
+            : 'No hay ningún usuario con sesión iniciada.';
+        if ($loggedOutUser !== null) {
+            $response['user'] = showUserData($loggedOutUser);
+            $response['connection'] = showUserConnection($loggedOutUser, $loggedOutSessionId);
+        }
         break;
 
     case 'usertime':
@@ -41,7 +55,7 @@ switch ($action) {
             $response['message'] = "No se encontraron conexiones para $name.";
             break;
         }
-        $response['message'] = "Tiempo de cada conexion de $name.";
+        $response['message'] = "Tiempos de conexión del usuario $name.";
         $response['connections'] = $timeConnections;
         $response['total_time'] = array_sum($timeConnections);
         break;
@@ -49,7 +63,7 @@ switch ($action) {
     case 'userdata':
         $userData = showUserData($name);
         if ($userData) {
-            $response['message'] = "Datos del usuario para $name.";
+            $response['message'] = "Datos del usuario $name.";
             $response['user'] = $userData;
         } else {
             $response['message'] = 'Usuario no encontrado.';
@@ -57,12 +71,12 @@ switch ($action) {
         break;
 
     case 'allusers':
-        $response['message'] = 'Todos los usuarios.';
+        $response['message'] = 'Listado de usuarios registrados.';
         $response['users'] = showAllUsers();
         break;
 
     case 'allconnections':
-        $response['message'] = 'Todas las conexiones.';
+        $response['message'] = 'Historial de todas las conexiones.';
         $response['connections'] = showAllConnections();
         break;
 
@@ -73,8 +87,8 @@ switch ($action) {
         }
         $expired = connectionsExpired($name);
         $response['message'] = $expired
-            ? "La conexión para $name ha expirado."
-            : "La conexión para $name aún está activa.";
+            ? "El usuario $name no tiene una conexión activa."
+            : "El usuario $name tiene una conexión activa.";
         $response['expired'] = $expired;
         break;
 

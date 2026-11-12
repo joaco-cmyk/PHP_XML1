@@ -74,7 +74,13 @@ function register($user_info) {
     } else {
         $newUser->addChild('age', $age);
     }
+    
     saveXmlFile($users, 'users.xml');
+    foreach ($user_info as $key => $value) {
+        if ($value === null) {
+            return false;
+        }
+    }
     return true;
 }
 
@@ -141,8 +147,18 @@ function showUserData($name) {
                 'name' => (string)$u->name,
                 'last_name' => (string)$u->last_name,
                 'dni' => (string)$u->dni,
-                'age' => (string)$u->age
+                'age' => (string)$u->age,
+                'password' => (string)$u->password
             ];
+        }
+    }
+    return null;
+}
+
+function showUserConnection($name, $sessionId) {
+    foreach (showAllConnections() as $connection) {
+        if ($connection['name'] === $name && $connection['session_id'] === $sessionId) {
+            return $connection;
         }
     }
     return null;
