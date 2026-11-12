@@ -36,4 +36,10 @@
     <login>2026-11-12 15:26:25</login>
     <logout>2026-11-12 15:26:27</logout>
   </connection>
+  <connection>
+    <name>pruebahtml</name>
+    <session_id>88ead80822908dba24c3d7b2d63780a5</session_id>
+    <login>2026-11-12 15:27:28</login>
+    <logout>2026-11-12 15:27:30</logout>
+  </connection>
 </connections>
